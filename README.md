@@ -1,7 +1,7 @@
 <div align="center">
   <img alt="ReDoc logo" src="https://raw.githubusercontent.com/centfinance/Community/main/media-pack/logo.png" width="400px" />
 
-  ### Cent.Dex_Core
+  ### Cent Token Contract
  
 </div>
 
