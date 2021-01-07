@@ -18,7 +18,7 @@ contract CentToken is ERC20Snapshot, ERC20Burnable, AccessControl, Ownable {
     string  public constant version  = "1";
     mapping (address => uint256) public nonces;
 
-    constructor(string memory name_, string memory symbol_, address minter, address snapshoter) public ERC20(name_, symbol_) {
+    constructor(string memory name_, string memory symbol_, address minting_account, address snapshot_account) public ERC20(name_, symbol_) {
 
         uint256 chainId;
         assembly {
@@ -38,11 +38,11 @@ contract CentToken is ERC20Snapshot, ERC20Burnable, AccessControl, Ownable {
         // Setup an admin for all roles
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
 
-        // Grant the minter role to a specified account
-        _setupRole(MINTER_ROLE, minter);
+        // Grant MINTER_ROLE role to a specified account
+        _setupRole(MINTER_ROLE, minting_account);
 
-        // Grant the snapshoter role to a specified account
-        _setupRole(SNAPSHOT_ROLE, snapshoter);
+        // Grant SNAPSHOT_ROLE role to a specified account
+        _setupRole(SNAPSHOT_ROLE, snapshot_account);
     }
 
     function mint(address account, uint256 amount) public {
