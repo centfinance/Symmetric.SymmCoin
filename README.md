@@ -1,11 +1,9 @@
 <div align="center">
   <img alt="ReDoc logo" src="https://raw.githubusercontent.com/centfinance/Community/main/media-pack/logo.png" width="400px" />
-
-  ### Cent Token Contract
  
 </div>
 
-# Cent token contract
+<h1 align=center><code>Cent Token Contract</code></h1>
 
 This project is the implementation of the ERC20 Cent Token.
 
