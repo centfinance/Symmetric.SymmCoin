@@ -20,10 +20,12 @@
 
 // const fs = require('fs');
 const HDWalletProvider = require('@truffle/hdwallet-provider');
+const Web3 = require('web3');
+const web3 = new Web3();
 require('ts-node/register');
 
 const infuraKey = 'fj4jll3k.....';
-const mnemonic = ''; // fs.readFileSync('.secret').toString().trim();
+const mnemonicPhrase = process.env.MNEMONIC; // fs.readFileSync('.secret').toString().trim();
 
 module.exports = {
     test_file_extension_regexp: /.*\.ts$/,
@@ -65,14 +67,14 @@ module.exports = {
                 mnemonic: {
                   phrase: mnemonicPhrase
                 },
-                providerOrUrl: "https://mainnet.infura.io/v3/{key}",
+                providerOrUrl: `https://mainnet.infura.io/v3/${infuraKey}`,
       //          numberOfAddresses: 1,
       //          shareNonce: true,
       //          derivationPath: "m/44'/1'/0'/0/"
                 derivationPath: "m/44'/60'/0'/0/"
               }),
             gas: 10000000,
-            gasPrice: 5000000000,
+            gasPrice: web3.utils.toWei('46', 'gwei'),
             network_id: 1,
         },
 
@@ -82,10 +84,10 @@ module.exports = {
                 mnemonic: {
                   phrase: mnemonicPhrase
                 },
-                providerOrUrl: "https://kovan.infura.io/v3/e68cb3352f7d4fb7848c4650917e4422",
+                providerOrUrl: `https://kovan.infura.io/v3/${infuraKey}`,
               }),
               gas: 10000000,
-              gasPrice: 5000000000,
+              gasPrice: web3.utils.toWei('46', 'gwei'),
               network_id: 42,
         },
 
@@ -118,7 +120,7 @@ module.exports = {
         // Useful for deploying to a public network.
         // NB: It's important to wrap the provider as a function.
         goerli: {
-            provider: () => new HDWalletProvider(mnemonic, `https://goerli.infura.io/v3/${infuraKey}`),
+            provider: () => new HDWalletProvider(mnemonicPhrase, `https://goerli.infura.io/v3/${infuraKey}`),
             network_id: 5, // Ropsten's id
             confirmations: 2, // # of confs to wait between deployments. (default: 0)
             timeoutBlocks: 200, // # of blocks before a deployment times out  (minimum/default: 50)
@@ -139,7 +141,7 @@ module.exports = {
             version: '0.6.10', // Fetch exact version from solc-bin (default: truffle's version)
             settings: { // See the solidity docs for advice about optimization and evmVersion
                 optimizer: {
-                    enabled: false,
+                    enabled: true,
                     runs: 200,
                 },
             },
