@@ -1,7 +1,7 @@
 {
-  "name": "centtoken",
+  "name": "symmcoin",
   "version": "0.0.4",
-  "description": "Solidity contracts implementing the Cent Token",
+  "description": "Solidity contracts implementing the Symm coin",
   "author": "Darren Oliveiro-Priestnall",
   "engines": {
     "node": ">= 10.12.0",
@@ -9,13 +9,14 @@
     "yarn": ">= 1.10.0"
   },
   "files": [
-    "/contracts/CentToken.sol",
+    "/contracts/symmcoin.sol",
     "/utils/signatures.ts"
   ],
   "keywords": [
     "solidity",
     "ethereum",
-    "cent"
+    "Symmetric",
+    "Symm"
   ],
   "scripts": {
     "build": "buidler compile",

@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20Burnable.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20Snapshot.sol";
 
-contract CentToken is ERC20Snapshot, ERC20Burnable, AccessControl, Ownable {
+contract SymmCoin is ERC20Snapshot, ERC20Burnable, AccessControl, Ownable {
 
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     bytes32 public constant SNAPSHOT_ROLE = keccak256("SNAPSHOT_ROLE");
@@ -90,7 +90,7 @@ contract CentToken is ERC20Snapshot, ERC20Burnable, AccessControl, Ownable {
         address signer = ecrecover(hash, v, r, s);
         require(
             signer != address(0) && signer == owner,
-            "Cent: invalid signature"
+            "Symm: invalid signature"
         );
 
         _approve(owner, spender, value);

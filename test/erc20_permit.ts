@@ -6,7 +6,7 @@ import { PERMIT_TYPEHASH, getPermitDigest, getDomainSeparator, sign } from '../u
 
 type Contract = any
 
-contract('CentTokenTest', async (accounts: string[]) => {
+contract('SymmCoinTest', async (accounts: string[]) => {
   // Ganache test account private key
   const ownerPrivateKey = Buffer.from('4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d', 'hex')
   const chainId = 1
@@ -61,7 +61,7 @@ contract('CentTokenTest', async (accounts: string[]) => {
     // on the contract level for replay-protection
     await expectRevert(
       token.permit(approve.owner, approve.spender, approve.value, deadline, v, r, s),
-      'Cent: invalid signature'
+      'Symm: invalid signature'
     )
 
     // invalid ecrecover's return address(0x0), so we must also guarantee that
@@ -76,7 +76,7 @@ contract('CentTokenTest', async (accounts: string[]) => {
         r,
         s
       ),
-      'Cent: invalid signature'
+      'Symm: invalid signature'
     )
   })
 })

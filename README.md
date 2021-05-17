@@ -3,9 +3,9 @@
  
 </div>
 
-<h1 align=center><code>Cent Token Contract</code></h1>
+<h1 align=center><code>Symm Coin Contract</code></h1>
 
-This project is the implementation of the ERC20 Cent Token.
+This project is the implementation of the ERC20 Symm coin.
 
 Where possible we have inherited from the audited OpenZepplin contracts but we have also added
 additional features including an implementation of ERC2612.
@@ -18,7 +18,7 @@ The implementation of ERC2612 was heavily influenced by the work of Georgios Kon
 
 ## How to Use
 
-`CentToken` is an `ERC20` contract. To test, make sure that you have Ganache-cli and Truffle installed alone with NodeJS.
+`SymmCoin` is an `ERC20` contract. To test, make sure that you have Ganache-cli and Truffle installed alone with NodeJS.
 
 Switch to a suitable version of Node
 
@@ -42,7 +42,7 @@ The `utils/signatures.ts` file contains useful functions to compute the `DOMAIN_
 
 ## Further manual testing
 
-A good way to become familiar with the Cent token and to carry our realtime testing is from the Truffle console.
+A good way to become familiar with the Symm coin and to carry our realtime testing is from the Truffle console.
 
 Start the Ganache network
 ```
@@ -73,10 +73,10 @@ Now start the Truffle console for interactive testing.
 truffle console
 ```
 
-The following are examples of commands you can issue to interact with the Cent contract. Be aware that the account used for minting or snapshotting must match what was set in the migration config file.
+The following are examples of commands you can issue to interact with the Symm contract. Be aware that the account used for minting or snapshotting must match what was set in the migration config file.
 ```
-// To get a reference to CentToken
-let instance = await CentToken.deployed()
+// To get a reference to SymmCoin
+let instance = await SymmCoin.deployed()
 instance
 
 // Mint coins
