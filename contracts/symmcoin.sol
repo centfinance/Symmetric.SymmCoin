@@ -1,39 +1,19 @@
 // contracts/CentToken.sol
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
+pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/token/ERC20/ERC20Burnable.sol";
-import "@openzeppelin/contracts/token/ERC20/ERC20Snapshot.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Snapshot.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/draft-ERC20Permit.sol";
 
-contract SymmCoin is ERC20Snapshot, ERC20Burnable, AccessControl, Ownable {
+contract SymmCoin is ERC20Snapshot, ERC20Burnable, AccessControl, Ownable, ERC20Permit {
 
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     bytes32 public constant SNAPSHOT_ROLE = keccak256("SNAPSHOT_ROLE");
-
-    bytes32 public immutable PERMIT_TYPEHASH = keccak256("Permit(address owner, address spender, uint256 value, uint256 deadline, uint8 v, bytes32 r, bytes32 s)");
-    bytes32 public immutable DOMAIN_SEPARATOR;
-
-    string  public constant version  = "1";
-    mapping (address => uint256) public nonces;
-
-    constructor(string memory name_, string memory symbol_, address minting_account, address snapshot_account) public ERC20(name_, symbol_) {
-
-        uint256 chainId;
-        assembly {
-            chainId := chainid()
-        }
-
-        DOMAIN_SEPARATOR = keccak256(
-            abi.encode(
-                keccak256("EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)"),
-                keccak256(bytes(name_)),
-                keccak256(bytes("1")),
-                chainId,
-                address(this)
-            )
-        );
+  
+    constructor(string memory name_, string memory symbol_, address minting_account, address snapshot_account) public ERC20(name_, symbol_) ERC20Permit(name_) {
 
         // Setup an admin for all roles
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
@@ -57,42 +37,5 @@ contract SymmCoin is ERC20Snapshot, ERC20Burnable, AccessControl, Ownable {
 
     function _beforeTokenTransfer(address from, address to, uint256 amount) internal override(ERC20Snapshot, ERC20) {
         ERC20Snapshot._beforeTokenTransfer(from, to, amount);
-    }
-
-    /**
-     * @dev See {IERC2612-permit}.
-     *
-     * In cases where the free option is not a concern, deadline can simply be
-     * set to uint(-1), so it should be seen as an optional parameter
-     */
-    function permit(address owner, address spender, uint256 value, uint256 deadline, uint8 v, bytes32 r, bytes32 s) public {
-        require(deadline >= block.timestamp, "Cent: expired deadline");
-
-        bytes32 hashStruct = keccak256(
-            abi.encode(
-                PERMIT_TYPEHASH,
-                owner,
-                spender,
-                value,
-                nonces[owner]++,
-                deadline
-            )
-        );
-
-        bytes32 hash = keccak256(
-            abi.encodePacked(
-                '\x19\x01',
-                DOMAIN_SEPARATOR,
-                hashStruct
-            )
-        );
-
-        address signer = ecrecover(hash, v, r, s);
-        require(
-            signer != address(0) && signer == owner,
-            "Symm: invalid signature"
-        );
-
-        _approve(owner, spender, value);
     }
 }
