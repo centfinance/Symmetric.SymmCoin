@@ -36,6 +36,6 @@ contract SymmCoin is ERC20Snapshot, ERC20Burnable, AccessControl, Ownable, ERC20
     }
 
     function _beforeTokenTransfer(address from, address to, uint256 amount) internal override(ERC20Snapshot, ERC20) {
-        ERC20Snapshot._beforeTokenTransfer(from, to, amount);
+        super._beforeTokenTransfer(from, to, amount);
     }
 }
