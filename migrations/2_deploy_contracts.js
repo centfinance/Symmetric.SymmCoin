@@ -5,10 +5,10 @@ module.exports = async (deployer, network, accounts) => {
 
     if (network == "development") {
         await deployer.deploy(TestERC20,1000);
-        await deployer.deploy(SymmCoin, "Symm", "SYMM", "0xFFcf8FDEE72ac11b5c542428B35EEF5769C409f0", "0x22d491Bde2303f2f43325b2108D26f1eAbA1e32b");
+        await deployer.deploy(SymmCoin, "Symmetric", "SYMM", "0x59e0A753Df69c54B2eEBe4E05c007345f0c61e85", "0x6e2d462488784D864BaeabcCee2aBaFd992a4BF0");
     }
     else
     {
-        await deployer.deploy(SymmCoin, "Symm", "SYMM", "0xFFcf8FDEE72ac11b5c542428B35EEF5769C409f0", "0x22d491Bde2303f2f43325b2108D26f1eAbA1e32b");
+        await deployer.deploy(SymmCoin, "Symmetric", "SYMM", "0x59e0A753Df69c54B2eEBe4E05c007345f0c61e85", "0x6e2d462488784D864BaeabcCee2aBaFd992a4BF0");
     }
 }

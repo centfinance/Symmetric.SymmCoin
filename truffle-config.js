@@ -73,8 +73,10 @@ module.exports = {
       //          derivationPath: "m/44'/1'/0'/0/"
                 derivationPath: "m/44'/60'/0'/0/"
               }),
-            gas: 10000000,
-            gasPrice: web3.utils.toWei('46', 'gwei'),
+            gas: 3111752,
+            confirmations: 2,    // # of confs to wait between deployments. (default: 0)
+            timeoutBlocks: 50000,  // # of blocks before a deployment times out  (minimum/default: 50)
+            gasPrice: web3.utils.toWei('58', 'gwei'),
             network_id: 1,
         },
 
@@ -133,7 +135,11 @@ module.exports = {
         reporter: 'eth-gas-reporter',
     },
 
-    plugins: ['solidity-coverage'],
+    plugins: ['solidity-coverage', 'truffle-plugin-verify'],
+
+    api_keys: {
+      etherscan: '<add key here>'
+    },
 
     // Configure your compilers
     compilers: {

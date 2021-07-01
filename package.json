@@ -48,6 +48,7 @@
     "solhint": "^3.3.6",
     "solidity-coverage": "^0.7.15",
     "truffle": "^5.3.8",
+    "truffle-plugin-verify": "^0.5.10",
     "truffle-typings": "^1.0.8",
     "ts-node": "5.0.1",
     "typescript": "^4.1.3"
